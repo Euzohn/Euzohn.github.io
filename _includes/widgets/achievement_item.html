@@ -1,0 +1,48 @@
+{% assign item = include.item %}
+{% assign category = item.category %}
+
+{% comment %} 设置图标和颜色 {% endcomment %}
+{% if category == "Scholarship" %}
+  {% assign icon = "fas fa-graduation-cap" %}
+  {% assign badge_class = "badge-success" %}
+{% elsif category == "Honor" %}
+  {% assign icon = "fas fa-award" %}
+  {% assign badge_class = "badge-warning" %}
+{% elsif category == "Competition" %}
+  {% assign icon = "fas fa-trophy" %}
+  {% assign badge_class = "badge-primary" %}
+{% elsif category == "Intellectual Property" %}
+  {% assign icon = "fas fa-certificate" %}
+  {% assign badge_class = "badge-info" %}
+{% else %}
+  {% assign icon = "fas fa-star" %}
+  {% assign badge_class = "badge-secondary" %}
+{% endif %}
+
+<div class="row no-gutters border-bottom border-gray p-3">
+  {% if item.image %}
+    <div class="col-md-2 col-3 pr-3">
+      <img src="{{ item.image | relative_url }}" alt="achievement image" class="img-fluid rounded shadow-sm">
+    </div>
+  {% endif %}
+
+  <div class="{% if item.image %}col-md-10 col-9{% else %}col{% endif %}">
+    <h5 class="mb-1 font-weight-normal">
+      <i class="{{ icon }} mr-1 text-muted"></i> {{ item.title }}
+    </h5>
+    <p class="mb-0 small text-muted">
+      {{ item.date | date: "%Y-%m-%d" }} · 
+      <span class="badge {{ badge_class }}">{{ category }}</span>
+    </p>
+    {% if item.description %}
+      <p class="mb-0 small mt-1">{{ item.description }}</p>
+    {% endif %}
+    {% if item.links %}
+      <p class="small mb-0 mt-1 text-muted">
+        {% for link in item.links %}
+          <a target="_blank" href="{{ link[1] }}">[{{ link[0] }}]</a>
+        {% endfor %}
+      </p>
+    {% endif %}
+  </div>
+</div>
