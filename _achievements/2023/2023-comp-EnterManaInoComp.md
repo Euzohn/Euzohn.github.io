@@ -1,0 +1,11 @@
+---
+title: First Prize, China Graduate Enterprise Management Innovation Competition
+date: 2023-11-25
+category: Competition
+description: >-
+  中国研究生企业管理创新大赛一等奖
+  </br>中国学位与研究生教育学会、中国科协青少年科技中心
+image: assets/images/ach/comp.png
+links:
+  # "Certificate": https://baike.baidu.com/item/%E4%B8%AD%E5%9B%BD%E7%A0%94%E7%A9%B6%E7%94%9F%E4%BC%81%E4%B8%9A%E7%AE%A1%E7%90%86%E5%88%9B%E6%96%B0%E5%A4%A7%E8%B5%9B/63342057
+---

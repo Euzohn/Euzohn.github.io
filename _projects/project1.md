@@ -1,7 +1,7 @@
 ---
 title: ❌Test Real-Time Sentiment Analysis in Livestreams
 date: 2024-12-01
-selected:       true
+selected: false
 cover: /assets/images/covers/cover1.jpg
 description: A multi-model platform for detecting and analyzing viewers' emotions in livestreaming e-commerce.
 tags: [Deep Learning, Livestreaming, Sentiment]
