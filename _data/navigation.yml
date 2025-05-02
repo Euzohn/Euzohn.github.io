@@ -9,5 +9,5 @@ pages:
   #   url: /showcase
   - name: Projects
     url: /projects
-  - name: Achievements
-    url: /achievements
+  # - name: Achievements
+  #   url: /achievements
