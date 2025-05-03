@@ -1,0 +1,215 @@
+---
+layout: default
+title: Photography
+navbar_title: Photography
+body_attr: >-
+  data-spy="scroll" data-target="#navbar-year" data-offset="100"
+---
+
+<div class="container-fluid mt-4">
+  <h2>Photography</h2>
+
+  <div id="gallery" class="masonry-grid mt-4"></div>
+
+  <!-- Loading Spinner -->
+  <div id="loading" class="text-center my-4" style="display: none;">
+    <div class="spinner-border text-secondary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  const allPhotos = [
+    {% assign all_photos = "" | split: "" %}
+    {% for entry in site.photography %}
+      {% assign all_photos = all_photos | concat: entry.photos %}
+    {% endfor %}
+    {% assign displayed_photos = all_photos | where: "visible", true | sort: "date" | reverse %}
+    {% for photo in displayed_photos %}
+      {
+        title: "{{ photo.title | escape }}",
+        url: "{{ photo.url | relative_url }}",
+        date: "{{ photo.date }}",
+        position: "{{ photo.position | escape }}",
+        description: "{{ photo.description | strip_newlines | escape }}"
+      }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ];
+
+  const pageSize = 20;
+  let currentIndex = 0;
+  let isLoading = false;
+
+  function loadNextPage() {
+    if (isLoading || currentIndex >= allPhotos.length) return;
+    isLoading = true;
+
+    const container = document.getElementById('gallery');
+    const loading = document.getElementById('loading');
+    loading.style.display = 'block';
+
+    const nextBatch = allPhotos.slice(currentIndex, currentIndex + pageSize);
+    nextBatch.forEach(photo => {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'photo-item';
+
+      wrapper.innerHTML = `
+        <div class="photo-wrapper position-relative">
+          <a href="${photo.url}" class="glightbox" data-glightbox="title: ${photo.title}; description: ${photo.description}">
+            <img class="lazy img-fluid rounded" data-src="${photo.url}" src="/assets/images/empty_300x200.png" alt="${photo.title}" />
+          </a>
+          <div class="photo-overlay p-3">
+            <h5 class="text-white">${photo.title}</h5>
+            <p class="text-white-50 small mb-1">${photo.date}${photo.position ? ' ・ ' + photo.position : ''}</p>
+          </div>
+        </div>
+      `;
+      container.appendChild(wrapper);
+
+      // Add portrait class if vertical
+      const img = wrapper.querySelector("img");
+      img.onload = () => {
+        if (img.naturalHeight > img.naturalWidth) {
+          img.classList.add("portrait");
+        }
+      };
+    });
+
+    // Re-init lightbox & lazy loading
+    if (typeof GLightbox !== 'undefined') GLightbox({ selector: ".glightbox" });
+    if (typeof lazyLoadImages === 'function') lazyLoadImages();
+
+    currentIndex += pageSize;
+    loading.style.display = 'none';
+    isLoading = false;
+  }
+
+  function lazyLoadImages() {
+    const lazyImages = document.querySelectorAll("img.lazy");
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            img.src = img.dataset.src;
+            img.classList.remove("lazy");
+            observer.unobserve(img);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      lazyImages.forEach(img => observer.observe(img));
+    } else {
+      lazyImages.forEach(img => {
+        img.src = img.dataset.src;
+        img.classList.remove("lazy");
+      });
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    loadNextPage();
+
+    window.addEventListener("scroll", () => {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 150) {
+        loadNextPage();
+      }
+    });
+  });
+</script>
+
+<!-- GLightbox -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+
+<!-- Styles -->
+<style>
+    .masonry-grid {
+      column-count: 3;
+      column-gap: 1.5rem;
+    }
+  
+    @media (max-width: 992px) {
+      .masonry-grid {
+        column-count: 2;
+      }
+    }
+  
+    @media (max-width: 576px) {
+      .masonry-grid {
+        column-count: 1;
+      }
+    }
+  
+    .photo-item {
+      break-inside: avoid;
+      margin-bottom: 1.5rem;
+    }
+  
+    .photo-wrapper {
+      position: relative;
+      overflow: hidden;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      background-color: #f0f0f0;
+    }
+  
+    .photo-wrapper img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 0.75rem;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+  
+    /* 竖屏图片样式 */
+    .photo-wrapper img.portrait {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* 图片填充整个容器，裁剪多余部分 */
+      border-radius: 0.75rem;
+    }
+  
+    .photo-wrapper:hover img {
+      transform: scale(1.05);
+    }
+  
+    .photo-overlay {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent);
+      color: white;
+      padding: 1rem;
+      opacity: 0;
+      transform: translateY(20%);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      border-bottom-left-radius: 0.75rem;
+      border-bottom-right-radius: 0.75rem;
+    }
+  
+    .photo-wrapper:hover .photo-overlay {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  
+    .photo-overlay h5 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+  
+    .photo-overlay p {
+      font-size: 0.875rem;
+      margin-bottom: 0;
+    }
+  
+    .photo-overlay .small {
+      font-size: 0.75rem;
+      color: #ccc;
+    }
+  </style>
+  
