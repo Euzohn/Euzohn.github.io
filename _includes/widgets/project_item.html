@@ -1,7 +1,7 @@
 {% assign item = include.item %}
 <div class="d-none d-md-block">
-    <div class="row no-gutters {% unless include.hide_bottom_border %}border-bottom{% endunless %} border-gray">
-        <div class="col-md-3 col-xl-2 mb-md-0 p-md-3">
+    <div class="row no-gutters d-flex align-items-stretch {% unless include.hide_bottom_border %}border-bottom{% endunless %} border-gray">
+        <div class="col-md-3 col-xl-2 mb-md-0 p-md-3 d-flex align-items-center">
             {%- if item.cover -%}
             <img data-src="{{ item.cover | relative_url }}" alt="{{ item.title }}" class="lazy w-100 rounded-sm" src="{{ '/assets/images/empty_300x200.png' | relative_url }}">
             {%- else -%}
@@ -11,15 +11,25 @@
         <div class="col-md-9 col-xl-10 p-3 pl-md-0">
             <h5 class="mt-0 mb-1 font-weight-normal">{{ item.title }}</h5>
             <p class="mt-0 mb-0 small text-muted">{{ item.description }}</p>
-            <p class="mt-0 mb-0 small">{{ item.date | date: "%B %Y" }}{% if item.tags %} · {{ item.tags | join: ", " }}{% endif %}</p>
-            
+            <p class="mt-0 mb-0 small">
+                {{ item.date | date: "%B %Y" }}
+                {% if item.endDate %}
+                –
+                {% if item.endDate == "present" or item.endDate == "Present" %}
+                    Present
+                {% else %}
+                    {{ item.endDate | date: "%B %Y" }}
+                {% endif %}
+                {% endif %}
+                {% if item.tags %} · {{ item.tags | join: ", " }}{% endif %}
+            </p>
             <p class="small pb-0 mb-0 lh-125 text-muted abstract-links">
                 {% for link in item.links %}
-                {% if link[1].url %}
-                <a target="{{ link[1]['target'] }}" href="{{ link[1]['url'] }}">[{{ link[0] }}]</a>
-                {% else %}
-                <a target="_blank" href="{{ link[1] }}">[{{ link[0] }}]</a>
-                {% endif %}
+                    {% if link[1].url %}
+                    <a target="{{ link[1]['target'] }}" href="{{ link[1]['url'] }}">[{{ link[0] }}]</a>
+                    {% else %}
+                    <a target="_blank" href="{{ link[1] }}">[{{ link[0] }}]</a>
+                    {% endif %}
                 {% endfor %}
             </p>
         </div>
@@ -33,15 +43,25 @@
             <div>
                 <h5 class="mt-0 mb-1 font-weight-normal">{{ item.title }}</h5>
                 <p class="mt-0 mb-0 small text-muted">{{ item.description }}</p>
-                <p class="mt-0 mb-0 small">{{ item.date | date: "%B %Y" }}{% if item.tags %} · {{ item.tags | join: ", " }}{% endif %}</p>
-
+                <p class="mt-0 mb-0 small">
+                    {{ item.date | date: "%B %Y" }}
+                    {% if item.endDate %}
+                    –
+                    {% if item.endDate == "present" or item.endDate == "Present" %}
+                        Present
+                    {% else %}
+                        {{ item.endDate | date: "%B %Y" }}
+                    {% endif %}
+                    {% endif %}
+                    {% if item.tags %} · {{ item.tags | join: ", " }}{% endif %}
+                </p>
                 <p class="small pb-0 mb-0 lh-125 text-muted abstract-links">
                     {% for link in item.links %}
-                    {% if link[1].url %}
-                    <a target="{{ link[1]['target'] }}" href="{{ link[1]['url'] }}">[{{ link[0] }}]</a>
-                    {% else %}
-                    <a target="_blank" href="{{ link[1] }}">[{{ link[0] }}]</a>
-                    {% endif %}
+                        {% if link[1].url %}
+                        <a target="{{ link[1]['target'] }}" href="{{ link[1]['url'] }}">[{{ link[0] }}]</a>
+                        {% else %}
+                        <a target="_blank" href="{{ link[1] }}">[{{ link[0] }}]</a>
+                        {% endif %}
                     {% endfor %}
                 </p>
             </div>
