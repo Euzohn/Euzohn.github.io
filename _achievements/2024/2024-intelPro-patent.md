@@ -8,5 +8,5 @@ description: >-
   </br>国家知识产权局 China National Intellectual Property Administration, CNIPA
 image: assets/images/ach/intpro.png
 links:
-  官方链接: http://epub.cnipa.gov.cn/cred/CN112507524B
+  Official Link: http://epub.cnipa.gov.cn/cred/CN112507524B
 ---
