@@ -1,6 +1,6 @@
 ---
 title: ❌Test Real-Time Sentiment Analysis in Livestreams
-date: 2024-12-01
+date: 2000-12-01
 endDate: present
 selected: false
 cover: /assets/images/covers/cover1.jpg
