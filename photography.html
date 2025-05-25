@@ -124,14 +124,16 @@ body_attr: >-
   }
 
   document.addEventListener("DOMContentLoaded", () => {
+    const loading = document.getElementById('loading');
+    loading.style.display = 'block'; // 初始显示
     loadNextPage();
-
     window.addEventListener("scroll", () => {
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 150) {
         loadNextPage();
       }
     });
   });
+
 </script>
 
 <!-- GLightbox -->
@@ -160,6 +162,7 @@ body_attr: >-
     .photo-item {
       break-inside: avoid;
       margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
     }
   
     .photo-wrapper {
