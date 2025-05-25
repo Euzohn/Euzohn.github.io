@@ -11,5 +11,5 @@ pages:
     url: /projects
   # - name: Achievements
   #   url: /achievements
-  # - name: Photography
-  # url: /photography
+  - name: Photography
+    url: /photography

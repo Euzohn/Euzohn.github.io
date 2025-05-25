@@ -11,4 +11,7 @@ links:
     Detail: 
         url: /docs/projects/2020/patent
         # code: test
+    Patent:
+        url: http://epub.cnipa.gov.cn/cred/CN112507524B
+        # url: /achievements#National Invention Patent
 ---

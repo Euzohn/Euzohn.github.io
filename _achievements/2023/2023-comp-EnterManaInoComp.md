@@ -7,5 +7,5 @@ description: >-
   </br>中国学位与研究生教育学会、中国科协青少年科技中心
 image: assets/images/ach/comp.png
 links:
-  "Certificate": "docs/achievements/2023/企业管理创新.pdf"
+  "Certificate": "assets/achievements/2023/企业管理创新.pdf"
 ---

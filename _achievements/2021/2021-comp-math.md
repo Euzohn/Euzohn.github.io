@@ -7,5 +7,5 @@ description: >-
   </br>中国数学会
 image: assets/images/ach/comp.png
 links:
-  "Certificate": "/docs/achievements/2021/数学竞赛.pdf"
+  "Certificate": "/assets/achievements/2021/数学竞赛.pdf"
 ---
