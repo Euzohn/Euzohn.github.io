@@ -7,5 +7,5 @@ description: >-
   </br>浙江省大学生科技竞赛委员会、浙江省大学生创新创业大赛组委会
 image: assets/images/ach/comp.png
 links:
-  "Certificate": "/assets/achievements/2020/互联网+.pdf"
+  "Certificate": "/assets/achievements/2020/internet.pdf"
 ---
