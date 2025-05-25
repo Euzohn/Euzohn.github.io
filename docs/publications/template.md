@@ -1,5 +1,5 @@
 ---
-title:          "❌Test Publication without cover image"
+title:          "Test Publication without cover image"
 date:           2023-01-1 00:01:00 +0800
 selected:       false
 pub:            "International Conference on Learning Representations (ICLR)"
@@ -10,13 +10,15 @@ pub_date:       "2023"
 
 abstract: >-
   When the cover image is not provided, it will generate a random colorful bubble images as the cover image using the <code>bubble_visual_hash.js</code> script.
-# cover:          /assets/images/covers/cover3.jpg
+cover:          /assets/images/covers/cover3.jpg
 authors:
-  - Your Name
-  - James Wang
+  - Your Name*
+  - James Wang#
   - Some Other Name
   - John Doe
 links:
+  Paper: https://www.cell.com
   Code: https://github.com/luost26/bubble-visual-hash
   Demo: https://luost26.github.io/bubble-visual-hash
+  Unsplash: https://unsplash.com/photos/orange-fruit-on-white-table-cloth-ISX_imp8t1o
 ---

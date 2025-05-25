@@ -92,16 +92,31 @@ body_attr: >-
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             const img = entry.target;
-            img.src = img.dataset.src;
-            img.classList.remove("lazy");
+            img.onerror = function() {
+              console.error('图片加载失败:', img.dataset.src);
+              img.src = '/assets/images/empty_300x200.png';
+            };
+            const tempImage = new Image();
+            tempImage.src = img.dataset.src;
+            tempImage.onload = function() {
+              img.src = img.dataset.src;
+              img.classList.remove("lazy");
+            };
             observer.unobserve(img);
           }
         });
-      }, { threshold: 0.1 });
+      }, { 
+        threshold: 0.2,
+        rootMargin: '50px'
+      });
 
       lazyImages.forEach(img => observer.observe(img));
     } else {
       lazyImages.forEach(img => {
+        img.onerror = function() {
+          console.error('图片加载失败:', img.dataset.src);
+          img.src = '/assets/images/empty_300x200.png';
+        };
         img.src = img.dataset.src;
         img.classList.remove("lazy");
       });

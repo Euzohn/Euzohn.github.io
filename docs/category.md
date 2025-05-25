@@ -1,0 +1,14 @@
+category:
+  - Landscape       # 风景
+  - Cityscape       # 城市
+  - Portrait        # 人像
+  - Street          # 街拍
+  - Night           # 夜景
+  - Architecture    # 建筑
+  - Macro           # 微距
+  - Black & White   # 黑白
+  - Travel          # 旅行
+  - Nature          # 自然
+  - Abstract        # 抽象
+  - Documentary     # 纪实
+  - Others          # 其他

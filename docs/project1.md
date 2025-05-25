@@ -4,9 +4,12 @@ date: 2000-12-01
 endDate: present
 selected: false
 cover: /assets/images/covers/cover1.jpg
-description: A multi-model platform for detecting and analyzing viewers' emotions in livestreaming e-commerce.
+description: >-
+  A multi-model platform for detecting and analyzing viewers' emotions in livestreaming e-commerce.
 tags: [Deep Learning, Livestreaming, Sentiment]
 links:
+  Detail: 
+    url: /docs/projects/2020/patent
   Code:
     url: https://github.com/yourname/sentiment-live
     target: _blank
