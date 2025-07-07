@@ -12,8 +12,13 @@ abstract: >-
   When the cover image is not provided, it will generate a random colorful bubble images as the cover image using the <code>bubble_visual_hash.js</code> script.
 cover:          /assets/images/covers/cover3.jpg
 authors:
+<<<<<<< HEAD:docs/publications/template.md
   - Your Name*
   - James Wang#
+=======
+  - Your Name*#
+  - James Wang*
+>>>>>>> 047711a24742a58f166093bb33a26b2a4619c450:_publications/2023/2023-pub-example-no-cover.md
   - Some Other Name
   - John Doe
 links:
